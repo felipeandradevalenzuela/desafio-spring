@@ -11,6 +11,6 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class FollowedDTO extends UserMinified {
-    private List<UserMinified> followers;
+public class FollowedListDTO extends UserMinified {
+    private List<UserMinified> followeds;
 }
