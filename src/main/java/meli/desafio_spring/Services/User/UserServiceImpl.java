@@ -31,6 +31,16 @@ public class UserServiceImpl implements IUserService{
         resp.setUserId(user.getUserId());
         resp.setUserName(user.getUserName());
         resp.setFolloweds(user.getFollowed());
+
+        switch (order){
+            case "name_asc":
+                resp.getFolloweds().sort(Comparator.comparing(UserMinified::getUserName,String.CASE_INSENSITIVE_ORDER));
+                break;
+            case "name_desc":
+                resp.getFolloweds().sort(Comparator.comparing(UserMinified::getUserName,String.CASE_INSENSITIVE_ORDER).reversed());
+                break;
+            default:
+        }
         return resp;
     }
 
@@ -63,13 +73,26 @@ public class UserServiceImpl implements IUserService{
         resp.setUserId(user.getUserId());
         resp.setUserName(user.getUserName());
         resp.setFollowers(user.getFollowers());
+
+        switch (order){
+            case "name_asc":
+                resp.getFollowers().sort(Comparator.comparing(UserMinified::getUserName,String.CASE_INSENSITIVE_ORDER));
+                break;
+            case "name_desc":
+                resp.getFollowers().sort(Comparator.comparing(UserMinified::getUserName,String.CASE_INSENSITIVE_ORDER).reversed());
+                break;
+            default:
+        }
+
         return resp;
     }
 
+    @Override
     public ResponseEntity<Object> follow(int userId, int userIdToFollow) throws IOException {
         return list.followUser(userId,userIdToFollow);
     }
 
+    @Override
     public ResponseEntity<Object> unfollow(int userId, int userIdToFollow) throws IOException {
         return list.unfollowUser(userId,userIdToFollow);
     }

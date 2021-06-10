@@ -26,20 +26,16 @@ public class UserRepository extends MainRepo implements IUserRepository{
     public void createFile(){
         super.createFile(newFilePath);
     }
+    public void writeFile() throws IOException {
+       super.writeFile(file,list);
+    }
 
     @Override
     public ResponseEntity<Object> followUser(int userId, int userIdToFollow) throws IOException {
 
         //buscamos en los datos persistentes, la existencia de los id de usuario
-        User follower= Arrays.stream(list) //seguidor
-                .filter(user -> user.getUserId() == userId)
-                .findFirst()
-                .orElseThrow(() -> new NullPointerException("No existe el ID de usuario, ID: "+userId));
-
-        User followed= Arrays.stream(list) //seguido
-                .filter(user -> user.getUserId() == userIdToFollow)
-                .findFirst()
-                .orElseThrow(() -> new NullPointerException("No existe el ID de usuario a seguir, ID: "+userIdToFollow));
+        User follower= getUser(userId);
+        User followed= getUser(userIdToFollow);
 
         //obtenemos los listados respectivos de seguidores y seguidos
         List<UserMinified> followsList = follower.getFollowers();
@@ -50,7 +46,7 @@ public class UserRepository extends MainRepo implements IUserRepository{
                 .anyMatch(usr -> usr.getUserId() == userId);
 
 
-        if(!followerExist){
+        if(!followerExist && followed.isSeller()){
             UserMinified nFollower = new UserMinified(followed.getUserId(),followed.getUserName());
             UserMinified nFollowed = new UserMinified(follower.getUserId(),follower.getUserName());
 
@@ -60,8 +56,7 @@ public class UserRepository extends MainRepo implements IUserRepository{
             followed.setFollowed(followedList);
             follower.setFollowers(followsList);
         } else {
-            //throw new IOException("Ya existe una relación entre los usuarios");
-            return new ResponseEntity<>("Ya existe una relación entre los usuarios", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("Existen problemas para relacionar a los usuarios", HttpStatus.BAD_REQUEST);
         }
 
         writeFile();
@@ -72,15 +67,8 @@ public class UserRepository extends MainRepo implements IUserRepository{
     public ResponseEntity<Object> unfollowUser(int userId, int userIdToUnfollow) throws IOException {
 
         //buscamos en los datos persistentes, la existencia de los id de usuario
-        User follower= Arrays.stream(list) //seguidor
-                .filter(user -> user.getUserId() == userId)
-                .findFirst()
-                .orElseThrow(() -> new NullPointerException("No existe el ID de usuario, ID: "+userId));
-
-        User followed = Arrays.stream(list) //seguido
-                .filter(user -> user.getUserId() == userIdToUnfollow)
-                .findFirst()
-                .orElseThrow(() -> new NullPointerException("No existe el ID de usuario a seguir, ID: "+userIdToUnfollow));
+        User follower= getUser(userId);
+        User followed = getUser(userIdToUnfollow);
 
         //obtenemos los listados respectivos de seguidores y seguidos
         List<UserMinified> followsList = follower.getFollowers();
@@ -110,11 +98,11 @@ public class UserRepository extends MainRepo implements IUserRepository{
 
     @Override
     public User[] getList(){
-        createFile();
         return readFile(file);
     }
 
     public User[] readFile(File file) {
+        createFile();
         var objectMapper = new ObjectMapper();
         objectMapper.configure(
                 DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
@@ -132,9 +120,26 @@ public class UserRepository extends MainRepo implements IUserRepository{
         return list;
     }
 
-    public void writeFile() throws IOException {
-        var objectMapper = new ObjectMapper();
-        objectMapper.writeValue(file,list);
+    public User setAsSeller(int userId){
+        User tmpUser = getUser(userId);
+        if(!tmpUser.isSeller()){
+            tmpUser.setSeller(true);
+            try {
+                writeFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return tmpUser;
+    }
+
+    public User getUser(int userId){
+        User user = Arrays.stream(getList())
+                .filter(usr -> usr.getUserId() == userId)
+                .findFirst()
+                .orElseThrow(() -> new NullPointerException("No existe el ID de usuario, ID: "+userId));
+        return user;
     }
 
 }

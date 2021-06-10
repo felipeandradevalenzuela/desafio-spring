@@ -16,34 +16,27 @@ public class UsersController {
 
     @PostMapping("/users/{userId}/follow/{userIdToFollow}")
     public ResponseEntity<Object> followUser(@PathVariable int userId, @PathVariable int userIdToFollow) throws Exception {
-        var resp = userService.follow(userId,userIdToFollow);
-        return resp;
+        return userService.follow(userId,userIdToFollow);
     }
 
     @GetMapping("/users/{userId}/followers/count")
     public FollowersCountDTO getFollowersCount(@PathVariable int userId){
-        var resp = userService.getFollowersCount(userId);
-        return resp;
+        return userService.getFollowersCount(userId);
     }
 
     @GetMapping("/users/{userId}/followers/list")
     public FollowersListDTO getFollowersList(@PathVariable int userId, @RequestParam(defaultValue = "none") String order){
-        var resp = userService.getFollowersList(userId,order);
-        //FALTA DESARROLLAR EL ORDEN
-        return resp;
+        return userService.getFollowersList(userId,order);
     }
 
     @GetMapping("/users/{userId}/followed/list")
     public FollowedListDTO getFollowedList(@PathVariable int userId, @RequestParam(defaultValue = "none") String order){
-        var resp = userService.getFollowedList(userId,order);
-        //FALTA DESARROLLAR EL ORDEN
-        return resp;
+        return userService.getFollowedList(userId,order);
     }
 
     @PostMapping("/users/{userId}/unfollow/{userIdToUnfollow}")
     public ResponseEntity<Object> unfollowUser(@PathVariable int userId, @PathVariable int userIdToUnfollow) throws Exception {
-        var resp = userService.unfollow(userId,userIdToUnfollow);
-        return resp;
+        return userService.unfollow(userId,userIdToUnfollow);
     }
 
 }
