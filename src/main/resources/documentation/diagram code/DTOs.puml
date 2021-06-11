@@ -1,0 +1,43 @@
+@startuml Diagramas
+
+class UserMinified {
+    - int userId
+    - String userName
+}
+
+package DTOs <<Folder>> {
+
+    class PromosDTO extends UserMinified {
+        - int promoproducts_count
+    }
+
+    class ProductsDTO extends UserMinified {
+        - List<PublicationPromo> post;
+    }
+
+    class FollowersListDTO extends UserMinified {
+        - List<UserMinified> followers
+    }
+
+    class FollowersCountDTO extends UserMinified {
+        - int followers_count
+    }
+
+    class FollowedPublicationsDTO {
+        - int userId
+        - List<PublicationBase> posts
+    }
+
+    class FollowedListDTO extends UserMinified {
+        - List<UserMinified> followeds
+    }
+
+    class GlobalResponseException {
+        - String menssage
+        - int status
+        - Timestamp time
+    }
+
+}
+
+@enduml

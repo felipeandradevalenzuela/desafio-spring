@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+
 @RestController
 public class UsersController {
 
@@ -37,6 +39,11 @@ public class UsersController {
     @PostMapping("/users/{userId}/unfollow/{userIdToUnfollow}")
     public ResponseEntity<Object> unfollowUser(@PathVariable int userId, @PathVariable int userIdToUnfollow) throws Exception {
         return userService.unfollow(userId,userIdToUnfollow);
+    }
+
+    @PostMapping("/user/add/{userName}")
+    public ResponseEntity<Object> newUser(@PathVariable String userName) throws IOException {
+        return userService.newUser(userName);
     }
 
 }

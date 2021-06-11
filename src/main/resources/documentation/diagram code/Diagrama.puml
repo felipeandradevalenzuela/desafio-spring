@@ -1,0 +1,179 @@
+@startuml Diagramas
+
+
+package Clases <<Folder>> {
+
+    class Publication extends PublicationBase{
+        - int userId
+    }
+
+    class PublicationBase {
+        - int id_post;
+        - Date date;
+        - PublicationDetail detail;
+        - int category;
+        - double price;
+        ..Constructor..
+        PublicationBase(PublicationPromo)
+    }
+
+    class PublicationDetail {
+        - int product_id
+        - String productName
+        - String type
+        - String brand
+        - String color
+        - String notes
+    }
+
+    class PublicationPromo extends Publication {
+        - boolean hasPromo
+        - double discount
+    }
+
+    class UserMinified {
+        - int userId
+        - String userName
+    }
+
+    class User extends UserMinified {
+        - boolean isBuyer
+        - boolean isSeller
+        - List<UserMinified> followed
+        - List<UserMinified> followers
+    }
+
+
+    class MainRepo {
+        + void createFile(Path)
+        + void writeFile(File, Object[])
+    }
+
+}
+
+package DTOs <<Folder>> {
+
+    class PromosDTO extends UserMinified {
+        - int promoproducts_count
+    }
+
+    class ProductsDTO extends UserMinified {
+        - List<PublicationPromo> post;
+    }
+
+    class FollowersListDTO extends UserMinified {
+        - List<UserMinified> followers
+    }
+
+    class FollowersCountDTO extends UserMinified {
+        - int followers_count
+    }
+
+    class FollowedPublicationsDTO {
+        - int userId
+        - List<PublicationBase> posts
+    }
+
+    class FollowedListDTO extends UserMinified {
+        - List<UserMinified> followeds
+    }
+
+    class GlobalResponseException {
+        - String menssage
+        - int status
+        - Timestamp time
+    }
+
+}
+
+package Controllers <<Folder>> {
+
+    class ProductsController {
+        - IProductService productService
+        ..@GetMapping..
+        + FollowedPublicationDTO getFollowedPublications(int, String) 
+        + PromosDTO getPromosByBuyer(int)
+        + ProductsDTO getAllProductsByBuyer(int, String)
+        ..@PostMapping..
+        + ResponseEntity<> addNewPost(Publication) 
+        + ResponseEntity<> addNewPromoPost(PublicationPromo) 
+    }
+
+    class UserController {
+        - IUserService userService
+        ..@GetMapping..
+        + FollowersCountDTO getFollowersCount(int)
+        + FollowersListDTO getFollowersList(int, String)
+        + FollowedListDTO getFollowedList(int, String)
+        ..@PostMapping..
+        + ResponseEntity<> followeUser(int, int)
+        + ResponseEntity<> unfollowUser(int, int)
+    }
+}
+
+package Repositories <<Folder>> {
+
+    class ProductRepository extends MainRepo implements IProductRepository{
+        - Path newFilePath
+        - File file
+        - HashMap<Integer, List<PublicationPromo>> list
+        + HashMap<Integer, List<PublicationPromo>> readFile(File)
+    }
+
+    class UserRepository extends MainRepo implements IUserRepository{
+        - Path newFilePath
+        - File file
+        - List<User> list
+        + List<User> readFile(File)
+    }
+
+    interface IProductRepository {
+       + ResponseEntity<> addNewPost(Publication)
+       + ResponseEntity<> addNewPromoPost(PublicationPromo)
+       + HashMap<Integer, List<PublicationPromo>> getList()
+    }
+
+    interface IUserRepository {
+        + ResponseEntity<> followUser(int, int)
+        + ResponseEntity<> unfollowUse(int, int)
+        + List<User> getList()
+        + User setAsSeller(int)
+        + User getUser(int)
+    }
+}
+
+package Services <<Folder>>{
+    package Product <<Folder>> {
+        
+        class ProductServiceImpl implements IProductService{
+            - IProductRepository listProduct
+            - IUserRepository listUser
+        }
+
+        interface IProductService {
+            + PromosDTO getPromosByBuyer(int)
+            + ProductsDTO getAllProductsByBuyer(int,String)
+            + FollowedPublicationsDTO getFollowedPublications(int, String)
+            + ResponseEntity<> addNewPost(Publication)
+            + ResponseEntity<> addNewPromoPost(PublicationPromo)
+        }
+    }
+
+    package User <<Folder>> {
+        
+        class UserServiceImpl implements IUserService{
+            - IUserRepository list
+        }
+
+        interface IUserService {
+            + FollowedListDTO getFollowedList(int, String)
+            + FollowersCountDTO getFollowersCount(int)
+            + FollowersListDTO getFollowersList(int, String)
+            + ResponseEntity<Object> follow(int, int)
+            + ResponseEntity<Object> unfollow(int, int)
+        }
+    }
+}
+
+
+@enduml

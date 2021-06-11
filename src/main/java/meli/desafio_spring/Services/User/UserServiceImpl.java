@@ -21,7 +21,7 @@ public class UserServiceImpl implements IUserService{
 
     @Override
     public FollowedListDTO getFollowedList(int userId, String order) {
-        User user = Arrays.stream(list.getList())
+        User user = list.getList().stream()
                 .filter(usr -> usr.getUserId() == userId)
                 .findFirst()
                 .orElseThrow(() -> new NullPointerException("No existe el ID de usuario, ID: "+userId));
@@ -46,7 +46,7 @@ public class UserServiceImpl implements IUserService{
 
     @Override
     public FollowersCountDTO getFollowersCount(int userId) {
-        User user = Arrays.stream(list.getList())
+        User user = list.getList().stream()
                 .filter(usr -> usr.getUserId() == userId)
                 .findFirst()
                 .orElseThrow(() -> new NullPointerException("No existe el ID de usuario, ID: "+userId));
@@ -63,7 +63,7 @@ public class UserServiceImpl implements IUserService{
 
     @Override
     public FollowersListDTO getFollowersList(int userId, String order) {
-        User user = Arrays.stream(list.getList())
+        User user = list.getList().stream()
                 .filter(usr -> usr.getUserId() == userId)
                 .findFirst()
                 .orElseThrow(() -> new NullPointerException("No existe el ID de usuario, ID: "+userId));
@@ -95,5 +95,10 @@ public class UserServiceImpl implements IUserService{
     @Override
     public ResponseEntity<Object> unfollow(int userId, int userIdToFollow) throws IOException {
         return list.unfollowUser(userId,userIdToFollow);
+    }
+
+    @Override
+    public ResponseEntity<Object> newUser(String userName) throws IOException {
+        return list.newUser(userName);
     }
 }

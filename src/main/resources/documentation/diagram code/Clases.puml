@@ -1,0 +1,52 @@
+@startuml Diagramas
+
+package Clases <<Folder>> {
+
+    class Publication extends PublicationBase{
+        - int userId
+    }
+
+    class PublicationBase {
+        - int id_post;
+        - Date date;
+        - PublicationDetail detail;
+        - int category;
+        - double price;
+
+        PublicationBase(PublicationPromo)
+    }
+
+    class PublicationDetail {
+        - int product_id
+        - String productName
+        - String type
+        - String brand
+        - String color
+        - String notes
+    }
+
+    class PublicationPromo extends Publication {
+        - boolean hasPromo
+        - double discount
+    }
+
+    class UserMinified {
+        - int userId
+        - String userName
+    }
+
+    class User extends UserMinified {
+        - boolean isBuyer
+        - boolean isSeller
+        - List<UserMinified> followed
+        - List<UserMinified> followers
+    }
+
+    class MainRepo {
+        + void createFile(Path)
+        + void writeFile(File, Object[])
+    }
+
+}
+
+@enduml

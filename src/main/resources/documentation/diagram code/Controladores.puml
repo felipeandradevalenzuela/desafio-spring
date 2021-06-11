@@ -1,0 +1,28 @@
+@startuml
+
+package Controllers <<Folder>> {
+
+    class ProductsController {
+        - IProductService productService
+        ..@GetMapping..
+        + FollowedPublicationDTO getFollowedPublications(int, String) 
+        + PromosDTO getPromosByBuyer(int)
+        + ProductsDTO getAllProductsByBuyer(int, String)
+        ..@PostMapping..
+        + ResponseEntity<> addNewPost(Publication) 
+        + ResponseEntity<> addNewPromoPost(PublicationPromo) 
+    }
+
+    class UserController {
+        - IUserService userService
+        ..@GetMapping..
+        + FollowersCountDTO getFollowersCount(int)
+        + FollowersListDTO getFollowersList(int, String)
+        + FollowedListDTO getFollowedList(int, String)
+        ..@PostMapping..
+        + ResponseEntity<> followeUser(int, int)
+        + ResponseEntity<> unfollowUser(int, int)
+    }
+}
+
+@enduml

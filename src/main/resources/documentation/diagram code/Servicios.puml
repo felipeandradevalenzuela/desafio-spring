@@ -1,0 +1,36 @@
+@startuml
+
+package Services <<Folder>>{
+    package Product <<Folder>> {
+        
+        class ProductServiceImpl implements IProductService{
+            - IProductRepository listProduct
+            - IUserRepository listUser
+        }
+
+        interface IProductService {
+            + PromosDTO getPromosByBuyer(int)
+            + ProductsDTO getAllProductsByBuyer(int,String)
+            + FollowedPublicationsDTO getFollowedPublications(int, String)
+            + ResponseEntity<> addNewPost(Publication)
+            + ResponseEntity<> addNewPromoPost(PublicationPromo)
+        }
+    }
+
+    package User <<Folder>> {
+        
+        class UserServiceImpl implements IUserService{
+            - IUserRepository list
+        }
+
+        interface IUserService {
+            + FollowedListDTO getFollowedList(int, String)
+            + FollowersCountDTO getFollowersCount(int)
+            + FollowersListDTO getFollowersList(int, String)
+            + ResponseEntity<Object> follow(int, int)
+            + ResponseEntity<Object> unfollow(int, int)
+        }
+    }
+}
+
+@enduml

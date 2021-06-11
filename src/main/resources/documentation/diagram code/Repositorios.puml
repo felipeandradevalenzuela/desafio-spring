@@ -1,0 +1,39 @@
+@startuml
+
+package Repositories <<Folder>> {
+    
+    class MainRepo {
+        + void createFile(Path)
+        + void writeFile(File, Object[])
+    }
+
+    class ProductRepository extends MainRepo implements IProductRepository{
+        - Path newFilePath
+        - File file
+        - HashMap<Integer, List<PublicationPromo>> list
+        + HashMap<Integer, List<PublicationPromo>> readFile(File)
+    }
+
+    class UserRepository extends MainRepo implements IUserRepository{
+        - Path newFilePath
+        - File file
+        - List<User> list
+        + List<User> readFile(File)
+    }
+
+    interface IProductRepository {
+       + ResponseEntity<> addNewPost(Publication)
+       + ResponseEntity<> addNewPromoPost(PublicationPromo)
+       + HashMap<Integer, List<PublicationPromo>> getList()
+    }
+
+    interface IUserRepository {
+        + ResponseEntity<> followUser(int, int)
+        + ResponseEntity<> unfollowUse(int, int)
+        + List<User> getList()
+        + User setAsSeller(int)
+        + User getUser(int)
+    }
+}
+
+@enduml

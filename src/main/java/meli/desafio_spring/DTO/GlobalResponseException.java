@@ -10,7 +10,7 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 @NoArgsConstructor
 public class GlobalResponseException {
-    private String mensaje;
+    private String message;
     private int status;
     private Timestamp time;
 }

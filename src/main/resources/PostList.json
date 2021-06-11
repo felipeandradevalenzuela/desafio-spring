@@ -1,1 +1,484 @@
-{"1":[{"id_post":0,"date":"10-06-2021","detail":{"product_id":0,"productName":"TEST","type":"IDK","brand":"Marca","color":"Rojo","notes":"Useful"},"category":1,"price":0.0,"userId":1,"hasPromo":false,"discount":0.0},{"id_post":1,"date":"01-06-2021","detail":{"product_id":1,"productName":"TEST","type":"IDK","brand":"Marca","color":"Rojo","notes":"Useful"},"category":1,"price":0.0,"userId":1,"hasPromo":false,"discount":0.0},{"id_post":2,"date":"05-05-2021","detail":{"product_id":2,"productName":"TEST","type":"IDK","brand":"Marca","color":"Rojo","notes":"Useful"},"category":1,"price":0.0,"userId":1,"hasPromo":false,"discount":0.0},{"id_post":3,"date":"03-07-2021","detail":{"product_id":3,"productName":"TEST22","type":"GG","brand":"Marca","color":"Rojo","notes":"WTF"},"category":4,"price":0.0,"userId":1,"hasPromo":false,"discount":0.0},{"id_post":4,"date":"28-05-2021","detail":{"product_id":4,"productName":"TEST22","type":"GG","brand":"Marca","color":"Rojo","notes":"WTF"},"category":4,"price":0.0,"userId":1,"hasPromo":false,"discount":0.0},{"id_post":5,"date":"15-05-2021","detail":{"product_id":5,"productName":"TEST32","type":"GG","brand":"Marca","color":"Rojo","notes":"WTF"},"category":4,"price":100.0,"userId":1,"hasPromo":false,"discount":0.0},{"id_post":7,"date":"15-05-2021","detail":{"product_id":7,"productName":"TEST32","type":"GG","brand":"Marca","color":"Rojo","notes":"WTF"},"category":4,"price":100.0,"userId":1,"hasPromo":true,"discount":15.0},{"id_post":8,"date":"15-05-2021","detail":{"product_id":8,"productName":"TEST432","type":"GG","brand":"Marca","color":"RED","notes":"WTF"},"category":4,"price":100.0,"userId":1,"hasPromo":true,"discount":15.0},{"id_post":9,"date":"03-05-2021","detail":{"product_id":9,"productName":"TEST432","type":"GG","brand":"Marca","color":"RED","notes":"WTF"},"category":4,"price":100.0,"userId":1,"hasPromo":true,"discount":150.0},{"id_post":10,"date":"22-05-2021","detail":{"product_id":10,"productName":"TEST432","type":"GG","brand":"Marca","color":"RED","notes":"WTF"},"category":4,"price":100.0,"userId":1,"hasPromo":true,"discount":150.0}],"2":[{"id_post":0,"date":"09-06-2021","detail":{"product_id":0,"productName":"Silla Gamer","type":"Gamer","brand":"Racer","color":"Red & Black","notes":"Special Edition"},"category":0,"price":100.0,"userId":2,"hasPromo":false,"discount":0.0},{"id_post":1,"date":"09-12-2021","detail":{"product_id":1,"productName":"Silla Gamer","type":"Gamer","brand":"Racer","color":"Red & Black","notes":"Special Edition"},"category":0,"price":100.0,"userId":2,"hasPromo":false,"discount":0.0},{"id_post":2,"date":"09-03-2021","detail":{"product_id":2,"productName":"Silla Gamer","type":"Gamer","brand":"Racer","color":"Red & Black","notes":"Special Edition"},"category":0,"price":100.0,"userId":2,"hasPromo":false,"discount":0.0},{"id_post":3,"date":"09-04-2022","detail":{"product_id":3,"productName":"Silla Gamer","type":"Gamer","brand":"Racer","color":"Red & Black","notes":"Special Edition"},"category":0,"price":100.0,"userId":2,"hasPromo":false,"discount":0.0},{"id_post":4,"date":"09-01-2021","detail":{"product_id":4,"productName":"Silla Gamer","type":"Gamer","brand":"Racer","color":"Red & Black","notes":"Special Edition"},"category":0,"price":100.0,"userId":2,"hasPromo":false,"discount":0.0},{"id_post":5,"date":"09-10-2022","detail":{"product_id":5,"productName":"Silla Gamer","type":"Gamer","brand":"Racer","color":"Red & Black","notes":"Special Edition"},"category":0,"price":100.0,"userId":2,"hasPromo":false,"discount":0.0},{"id_post":6,"date":"09-10-2021","detail":{"product_id":6,"productName":"Silla Gamer","type":"Gamer","brand":"Racer","color":"Red & Black","notes":"Special Edition"},"category":0,"price":100.0,"userId":2,"hasPromo":false,"discount":0.0},{"id_post":7,"date":"15-05-2021","detail":{"product_id":7,"productName":"TEST22","type":"GG","brand":"Marca","color":"Rojo","notes":"WTF"},"category":4,"price":0.0,"userId":2,"hasPromo":false,"discount":0.0}]}
+{
+  "1": [
+    {
+      "id_post": 0,
+      "date": "10-06-2021",
+      "detail": {
+        "product_id": 0,
+        "productName": "TEST",
+        "type": "IDK",
+        "brand": "Marca",
+        "color": "Rojo",
+        "notes": "Useful"
+      },
+      "category": 1,
+      "price": 0.0,
+      "userId": 1,
+      "hasPromo": false,
+      "discount": 0.0
+    },
+    {
+      "id_post": 1,
+      "date": "01-06-2021",
+      "detail": {
+        "product_id": 1,
+        "productName": "TEST",
+        "type": "IDK",
+        "brand": "Marca",
+        "color": "Rojo",
+        "notes": "Useful"
+      },
+      "category": 1,
+      "price": 0.0,
+      "userId": 1,
+      "hasPromo": false,
+      "discount": 0.0
+    },
+    {
+      "id_post": 2,
+      "date": "05-05-2021",
+      "detail": {
+        "product_id": 2,
+        "productName": "TEST",
+        "type": "IDK",
+        "brand": "Marca",
+        "color": "Rojo",
+        "notes": "Useful"
+      },
+      "category": 1,
+      "price": 0.0,
+      "userId": 1,
+      "hasPromo": false,
+      "discount": 0.0
+    },
+    {
+      "id_post": 3,
+      "date": "03-07-2021",
+      "detail": {
+        "product_id": 3,
+        "productName": "TEST22",
+        "type": "GG",
+        "brand": "Marca",
+        "color": "Rojo",
+        "notes": "WTF"
+      },
+      "category": 4,
+      "price": 0.0,
+      "userId": 1,
+      "hasPromo": false,
+      "discount": 0.0
+    },
+    {
+      "id_post": 4,
+      "date": "28-05-2021",
+      "detail": {
+        "product_id": 4,
+        "productName": "TEST22",
+        "type": "GG",
+        "brand": "Marca",
+        "color": "Rojo",
+        "notes": "WTF"
+      },
+      "category": 4,
+      "price": 0.0,
+      "userId": 1,
+      "hasPromo": false,
+      "discount": 0.0
+    },
+    {
+      "id_post": 5,
+      "date": "15-05-2021",
+      "detail": {
+        "product_id": 5,
+        "productName": "TEST32",
+        "type": "GG",
+        "brand": "Marca",
+        "color": "Rojo",
+        "notes": "WTF"
+      },
+      "category": 4,
+      "price": 100.0,
+      "userId": 1,
+      "hasPromo": false,
+      "discount": 0.0
+    },
+    {
+      "id_post": 7,
+      "date": "15-05-2021",
+      "detail": {
+        "product_id": 7,
+        "productName": "TEST32",
+        "type": "GG",
+        "brand": "Marca",
+        "color": "Rojo",
+        "notes": "WTF"
+      },
+      "category": 4,
+      "price": 100.0,
+      "userId": 1,
+      "hasPromo": true,
+      "discount": 15.0
+    },
+    {
+      "id_post": 8,
+      "date": "15-05-2021",
+      "detail": {
+        "product_id": 8,
+        "productName": "TEST432",
+        "type": "GG",
+        "brand": "Marca",
+        "color": "RED",
+        "notes": "WTF"
+      },
+      "category": 4,
+      "price": 100.0,
+      "userId": 1,
+      "hasPromo": true,
+      "discount": 15.0
+    },
+    {
+      "id_post": 9,
+      "date": "03-05-2021",
+      "detail": {
+        "product_id": 9,
+        "productName": "TEST432",
+        "type": "GG",
+        "brand": "Marca",
+        "color": "RED",
+        "notes": "WTF"
+      },
+      "category": 4,
+      "price": 100.0,
+      "userId": 1,
+      "hasPromo": true,
+      "discount": 150.0
+    },
+    {
+      "id_post": 10,
+      "date": "22-05-2021",
+      "detail": {
+        "product_id": 10,
+        "productName": "TEST432",
+        "type": "GG",
+        "brand": "Marca",
+        "color": "RED",
+        "notes": "WTF"
+      },
+      "category": 4,
+      "price": 100.0,
+      "userId": 1,
+      "hasPromo": true,
+      "discount": 150.0
+    },
+    {
+      "id_post": 11,
+      "date": "10-06-2021",
+      "detail": {
+        "product_id": 11,
+        "productName": "PRUEBA PROMO",
+        "type": "GG",
+        "brand": "Marca",
+        "color": "Rojo",
+        "notes": "WTF"
+      },
+      "category": 4,
+      "price": 100.0,
+      "userId": 1,
+      "hasPromo": false,
+      "discount": 0.0
+    },
+    {
+      "id_post": 12,
+      "date": "10-06-2021",
+      "detail": {
+        "product_id": 12,
+        "productName": "PRUEBA PROMO",
+        "type": "GG",
+        "brand": "Marca",
+        "color": "Rojo",
+        "notes": "WTF"
+      },
+      "category": 4,
+      "price": 100.0,
+      "userId": 1,
+      "hasPromo": true,
+      "discount": 150.0
+    }
+  ],
+  "2": [
+    {
+      "id_post": 0,
+      "date": "09-06-2021",
+      "detail": {
+        "product_id": 0,
+        "productName": "Silla Gamer",
+        "type": "Gamer",
+        "brand": "Racer",
+        "color": "Red & Black",
+        "notes": "Special Edition"
+      },
+      "category": 0,
+      "price": 100.0,
+      "userId": 2,
+      "hasPromo": false,
+      "discount": 0.0
+    },
+    {
+      "id_post": 1,
+      "date": "09-12-2021",
+      "detail": {
+        "product_id": 1,
+        "productName": "Silla Gamer",
+        "type": "Gamer",
+        "brand": "Racer",
+        "color": "Red & Black",
+        "notes": "Special Edition"
+      },
+      "category": 0,
+      "price": 100.0,
+      "userId": 2,
+      "hasPromo": false,
+      "discount": 0.0
+    },
+    {
+      "id_post": 2,
+      "date": "09-03-2021",
+      "detail": {
+        "product_id": 2,
+        "productName": "Silla Gamer",
+        "type": "Gamer",
+        "brand": "Racer",
+        "color": "Red & Black",
+        "notes": "Special Edition"
+      },
+      "category": 0,
+      "price": 100.0,
+      "userId": 2,
+      "hasPromo": false,
+      "discount": 0.0
+    },
+    {
+      "id_post": 3,
+      "date": "09-04-2022",
+      "detail": {
+        "product_id": 3,
+        "productName": "Silla Gamer",
+        "type": "Gamer",
+        "brand": "Racer",
+        "color": "Red & Black",
+        "notes": "Special Edition"
+      },
+      "category": 0,
+      "price": 100.0,
+      "userId": 2,
+      "hasPromo": false,
+      "discount": 0.0
+    },
+    {
+      "id_post": 4,
+      "date": "09-01-2021",
+      "detail": {
+        "product_id": 4,
+        "productName": "Silla Gamer",
+        "type": "Gamer",
+        "brand": "Racer",
+        "color": "Red & Black",
+        "notes": "Special Edition"
+      },
+      "category": 0,
+      "price": 100.0,
+      "userId": 2,
+      "hasPromo": false,
+      "discount": 0.0
+    },
+    {
+      "id_post": 5,
+      "date": "09-10-2022",
+      "detail": {
+        "product_id": 5,
+        "productName": "Silla Gamer",
+        "type": "Gamer",
+        "brand": "Racer",
+        "color": "Red & Black",
+        "notes": "Special Edition"
+      },
+      "category": 0,
+      "price": 100.0,
+      "userId": 2,
+      "hasPromo": false,
+      "discount": 0.0
+    },
+    {
+      "id_post": 6,
+      "date": "09-10-2021",
+      "detail": {
+        "product_id": 6,
+        "productName": "Silla Gamer",
+        "type": "Gamer",
+        "brand": "Racer",
+        "color": "Red & Black",
+        "notes": "Special Edition"
+      },
+      "category": 0,
+      "price": 100.0,
+      "userId": 2,
+      "hasPromo": false,
+      "discount": 0.0
+    },
+    {
+      "id_post": 7,
+      "date": "15-05-2021",
+      "detail": {
+        "product_id": 7,
+        "productName": "TEST22",
+        "type": "GG",
+        "brand": "Marca",
+        "color": "Rojo",
+        "notes": "WTF"
+      },
+      "category": 4,
+      "price": 0.0,
+      "userId": 2,
+      "hasPromo": false,
+      "discount": 0.0
+    }
+  ],
+  "4": [
+    {
+      "id_post": 0,
+      "date": "10-06-2021",
+      "detail": {
+        "product_id": 0,
+        "productName": "PC32",
+        "type": "GG",
+        "brand": "Marca",
+        "color": "Rojo",
+        "notes": "WTF"
+      },
+      "category": 4,
+      "price": 100.0,
+      "userId": 4,
+      "hasPromo": false,
+      "discount": 0.0
+    },
+    {
+      "id_post": 1,
+      "date": "09-06-2021",
+      "detail": {
+        "product_id": 1,
+        "productName": "PC32",
+        "type": "GG",
+        "brand": "Marca",
+        "color": "Rojo",
+        "notes": "WTF"
+      },
+      "category": 4,
+      "price": 100.0,
+      "userId": 4,
+      "hasPromo": false,
+      "discount": 0.0
+    },
+    {
+      "id_post": 2,
+      "date": "04-06-2021",
+      "detail": {
+        "product_id": 2,
+        "productName": "PC32",
+        "type": "GG",
+        "brand": "Marca",
+        "color": "Rojo",
+        "notes": "WTF"
+      },
+      "category": 4,
+      "price": 100.0,
+      "userId": 4,
+      "hasPromo": false,
+      "discount": 0.0
+    },
+    {
+      "id_post": 3,
+      "date": "28-05-2021",
+      "detail": {
+        "product_id": 3,
+        "productName": "PC32",
+        "type": "GG",
+        "brand": "Marca",
+        "color": "Rojo",
+        "notes": "WTF"
+      },
+      "category": 4,
+      "price": 100.0,
+      "userId": 4,
+      "hasPromo": false,
+      "discount": 0.0
+    },
+    {
+      "id_post": 4,
+      "date": "09-06-2021",
+      "detail": {
+        "product_id": 4,
+        "productName": "PC32",
+        "type": "GG",
+        "brand": "Marca",
+        "color": "Rojo",
+        "notes": "WTF"
+      },
+      "category": 4,
+      "price": 100.0,
+      "userId": 4,
+      "hasPromo": false,
+      "discount": 0.0
+    },
+    {
+      "id_post": 5,
+      "date": "22-05-2021",
+      "detail": {
+        "product_id": 5,
+        "productName": "PC32",
+        "type": "GG",
+        "brand": "Marca",
+        "color": "Rojo",
+        "notes": "WTF"
+      },
+      "category": 4,
+      "price": 100.0,
+      "userId": 4,
+      "hasPromo": false,
+      "discount": 0.0
+    },
+    {
+      "id_post": 6,
+      "date": "22-05-2021",
+      "detail": {
+        "product_id": 6,
+        "productName": "PC32",
+        "type": "GG",
+        "brand": "Marca",
+        "color": "Rojo",
+        "notes": "WTF"
+      },
+      "category": 4,
+      "price": 100.0,
+      "userId": 4,
+      "hasPromo": false,
+      "discount": 0.0
+    },
+    {
+      "id_post": 8,
+      "date": "10-06-2021",
+      "detail": {
+        "product_id": 8,
+        "productName": "PRUEBA PROMO",
+        "type": "GG",
+        "brand": "Marca",
+        "color": "Rojo",
+        "notes": "WTF"
+      },
+      "category": 4,
+      "price": 100.0,
+      "userId": 4,
+      "hasPromo": false,
+      "discount": 0.0
+    }
+  ]
+}
