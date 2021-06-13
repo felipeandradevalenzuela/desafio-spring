@@ -14,7 +14,6 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
 import java.util.List;
 
 @Repository
@@ -28,10 +27,16 @@ public class UserRepository extends MainRepo implements IUserRepository{
         super.createFile(newFilePath);
     }
     public void writeFile() throws IOException {
-        var objectMapper = new ObjectMapper();
-        objectMapper.writeValue(file,list);
+        super.writeFile(file, list);
     }
 
+    /**
+     *  Metodo para realizar el seguimiento de un usuario a otro
+     * @param userId
+     * @param userIdToFollow
+     * @return
+     * @throws IOException
+     */
     @Override
     public ResponseEntity<Object> followUser(int userId, int userIdToFollow) throws IOException {
 
@@ -65,6 +70,13 @@ public class UserRepository extends MainRepo implements IUserRepository{
         return new ResponseEntity<>("Relación creada de manera exitosa", HttpStatus.OK);
     }
 
+    /**
+     * Metodo para quitar el seguimiento de un usuario a otro
+     * @param userId
+     * @param userIdToUnfollow
+     * @return
+     * @throws IOException
+     */
     @Override
     public ResponseEntity<Object> unfollowUser(int userId, int userIdToUnfollow) throws IOException {
 
@@ -73,24 +85,24 @@ public class UserRepository extends MainRepo implements IUserRepository{
         User followed = getUser(userIdToUnfollow);
 
         //obtenemos los listados respectivos de seguidores y seguidos
-        List<UserMinified> followsList = follower.getFollowers();
-        List<UserMinified> followedList = followed.getFollowed();
+        var followsList = follower.getFollowers();
+        var followedList = followed.getFollowed();
+        var userFollowedList = follower.getFollowed();
 
         //revisamos si ya es seguido por este usuario
-        boolean followerExist = followedList.stream()
-                .anyMatch(usr -> usr.getUserId() == userId);
+        boolean followerExist = userFollowedList.stream()
+                .anyMatch(usr -> usr.getUserId() == userIdToUnfollow);
 
         if(followerExist){
-            UserMinified nFollower = new UserMinified(followed.getUserId(),followed.getUserName());
-            UserMinified nFollowed = new UserMinified(follower.getUserId(),follower.getUserName());
+            UserMinified nFollower = new UserMinified(follower.getUserId(),follower.getUserName());
+            UserMinified nFollowed = new UserMinified(followed.getUserId(),followed.getUserName());
 
-            followsList.remove(nFollower);
-            followedList.remove(nFollowed);
+            followsList.remove(nFollowed);
+            followedList.remove(nFollower);
 
-            followed.setFollowed(followedList);
-            follower.setFollowers(followsList);
+            followed.setFollowers(followedList);
+            follower.setFollowed(followsList);
         } else {
-            //throw new IOException("Ya existe una relación entre los usuarios");
             return new ResponseEntity<>("No existe una relación entre los usuarios", HttpStatus.BAD_REQUEST);
         }
 
@@ -98,11 +110,21 @@ public class UserRepository extends MainRepo implements IUserRepository{
         return new ResponseEntity<>("Relación eliminada de manera exitosa", HttpStatus.OK);
     }
 
+    /**
+     * Metodo para obtener el listado de usuarios existentes
+     * @return
+     */
     @Override
     public List<User> getList(){
-        return readFile(file);
+        return list;
     }
 
+    /**
+     * Metodo para la creación de un nuevo usuario
+     * @param userName
+     * @return
+     * @throws IOException
+     */
     public ResponseEntity<Object> newUser(String userName) throws IOException {
         var tmp = list.stream().filter(u -> u.getUserName().equals(userName)).findFirst();
 
@@ -140,6 +162,11 @@ public class UserRepository extends MainRepo implements IUserRepository{
         return list;
     }
 
+    /**
+     * Metodo para setear a un usuario como vendedor
+     * @param userId
+     * @return
+     */
     public User setAsSeller(int userId){
         User tmpUser = getUser(userId);
         if(!tmpUser.isSeller()){
@@ -154,6 +181,11 @@ public class UserRepository extends MainRepo implements IUserRepository{
         return tmpUser;
     }
 
+    /**
+     * Metodo para obtener un usuario a partir de su id
+     * @param userId
+     * @return
+     */
     public User getUser(int userId){
         User user = list.stream()
                 .filter(usr -> usr.getUserId() == userId)

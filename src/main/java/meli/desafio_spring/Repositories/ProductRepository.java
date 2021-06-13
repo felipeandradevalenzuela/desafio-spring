@@ -35,10 +35,14 @@ public class ProductRepository extends MainRepo implements IProductRepository {
         super.createFile(newFilePath);
     }
     public void writeFile() throws IOException {
-        var objectMapper = new ObjectMapper();
-        objectMapper.writeValue(file,list);
+        super.writeFile(file,list);
     }
 
+    /**
+     * Metodo para agregar un nuevo producto a la bd
+     * @param publication
+     * @return
+     */
     @Override
     public ResponseEntity<Object> addNewPost(Publication publication) {
         if(list == null){
@@ -62,6 +66,11 @@ public class ProductRepository extends MainRepo implements IProductRepository {
         return new ResponseEntity<>("Se agrego el producto de manera correcta", HttpStatus.OK);
     }
 
+    /**
+     * Metodo para agregar un nuevo producto en promocion a la bd
+     * @param publicationPromo
+     * @return
+     */
     @Override
     public ResponseEntity<Object> addNewPromoPost(PublicationPromo publicationPromo) {
         if(list == null){
@@ -93,9 +102,13 @@ public class ProductRepository extends MainRepo implements IProductRepository {
         return new ResponseEntity<>("Se agrego el producto de manera correcta", HttpStatus.OK);
     }
 
+    /**
+     * Metodo paraobtener el listado de publicaciones
+     * @return
+     */
     @Override
     public HashMap<Integer, List<PublicationPromo>> getList(){
-        return readFile(file);
+        return list;
     }
 
     public HashMap<Integer, List<PublicationPromo>> readFile(File file) {
@@ -111,12 +124,15 @@ public class ProductRepository extends MainRepo implements IProductRepository {
                 e.printStackTrace();
             }
         }
-
         return list;
     }
 
+    /**
+     * Metodo para crear de manera dinamica los productos
+     * @param publication
+     * @return
+     */
     public PublicationPromo factoryPost(Publication publication){
-
         PublicationPromo tmp = new PublicationPromo(publication);
         if(list.get(publication.getUserId()) == null){
             tmp.setId_post(0);
@@ -125,8 +141,6 @@ public class ProductRepository extends MainRepo implements IProductRepository {
             tmp.setId_post(list.get(publication.getUserId()).size());
             tmp.getDetail().setProduct_id(list.get(publication.getUserId()).size());
         }
-
-
         return tmp;
     }
 }

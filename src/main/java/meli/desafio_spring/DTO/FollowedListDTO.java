@@ -15,4 +15,10 @@ import java.util.List;
 @JsonPropertyOrder({"userId","userName","followeds"})
 public class FollowedListDTO extends UserMinified {
     private List<UserMinified> followeds;
+
+    public FollowedListDTO(User user) {
+        setUserId(user.getUserId());
+        setUserName(user.getUserName());
+        setFolloweds(user.getFollowed());
+    }
 }

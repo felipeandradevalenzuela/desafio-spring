@@ -24,7 +24,7 @@ public class ProductsController {
     }
 
     @GetMapping("/products/followed/{userId}/list/")
-    public FollowedPublicationsDTO getFollowedPublications(@PathVariable int userId,@RequestParam(defaultValue = "date_asc") String order){
+    public FollowedPublicationsDTO getFollowedPublications(@PathVariable int userId,@RequestParam(defaultValue = "date_desc") String order){
         return productService.getFollowedPublications(userId,order);
     }
 
@@ -39,7 +39,7 @@ public class ProductsController {
     }
 
     @GetMapping("/products/{userId}/list/")
-    public ProductsDTO getAllProductsByBuyer(@PathVariable int userId,@RequestParam(defaultValue = "date_asc") String order){
+    public ProductsDTO getAllProductsByBuyer(@PathVariable int userId,@RequestParam(defaultValue = "date_desc") String order){
         return productService.getAllProductsByBuyer(userId,order);
     }
 

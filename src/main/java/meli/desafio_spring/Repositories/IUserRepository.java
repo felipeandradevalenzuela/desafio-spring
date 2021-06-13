@@ -4,6 +4,7 @@ import meli.desafio_spring.Entities.User;
 import org.springframework.http.ResponseEntity;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 public interface IUserRepository {
@@ -14,4 +15,6 @@ public interface IUserRepository {
     User setAsSeller(int userId);
     User getUser(int userId);
     ResponseEntity<Object> newUser(String userName) throws IOException;
+    Date convertDate(int days);
+
 }

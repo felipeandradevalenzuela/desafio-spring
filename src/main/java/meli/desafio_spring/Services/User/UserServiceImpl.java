@@ -19,71 +19,42 @@ public class UserServiceImpl implements IUserService{
     @Autowired
     private IUserRepository list;
 
+    /**
+     * Metodo para obtener el listado de usuarios que sigue un determinado usuario
+     * @param userId
+     * @param order
+     * @return
+     */
     @Override
     public FollowedListDTO getFollowedList(int userId, String order) {
-        User user = list.getList().stream()
-                .filter(usr -> usr.getUserId() == userId)
-                .findFirst()
-                .orElseThrow(() -> new NullPointerException("No existe el ID de usuario, ID: "+userId));
-
-        FollowedListDTO resp = new FollowedListDTO();
-
-        resp.setUserId(user.getUserId());
-        resp.setUserName(user.getUserName());
-        resp.setFolloweds(user.getFollowed());
-
-        switch (order){
-            case "name_asc":
-                resp.getFolloweds().sort(Comparator.comparing(UserMinified::getUserName,String.CASE_INSENSITIVE_ORDER));
-                break;
-            case "name_desc":
-                resp.getFolloweds().sort(Comparator.comparing(UserMinified::getUserName,String.CASE_INSENSITIVE_ORDER).reversed());
-                break;
-            default:
-        }
+        User user = list.getUser(userId);
+        var resp = new FollowedListDTO(user);
+        sortName(resp,order);
         return resp;
     }
 
+    /**
+     * Metodo para obtener el conteo de los usuarios que siguen a un determinado usuario
+     * @param userId
+     * @return
+     */
     @Override
     public FollowersCountDTO getFollowersCount(int userId) {
-        User user = list.getList().stream()
-                .filter(usr -> usr.getUserId() == userId)
-                .findFirst()
-                .orElseThrow(() -> new NullPointerException("No existe el ID de usuario, ID: "+userId));
-
-        List<UserMinified> followers = user.getFollowers();
-        FollowersCountDTO resp = new FollowersCountDTO();
-
-        resp.setUserId(user.getUserId());
-        resp.setUserName(user.getUserName());
-        resp.setFollowers_count(followers.size());
-
-        return resp;
+        User user = list.getUser(userId);
+        return new FollowersCountDTO(user);
     }
 
+    /**
+     * Metodo para obtener el listado de usuarios que siguen un determinado usuario
+     * @param userId
+     * @param order
+     * @return
+     */
     @Override
     public FollowersListDTO getFollowersList(int userId, String order) {
-        User user = list.getList().stream()
-                .filter(usr -> usr.getUserId() == userId)
-                .findFirst()
-                .orElseThrow(() -> new NullPointerException("No existe el ID de usuario, ID: "+userId));
-
-        FollowersListDTO resp = new FollowersListDTO();
-
-        resp.setUserId(user.getUserId());
-        resp.setUserName(user.getUserName());
-        resp.setFollowers(user.getFollowers());
-
-        switch (order){
-            case "name_asc":
-                resp.getFollowers().sort(Comparator.comparing(UserMinified::getUserName,String.CASE_INSENSITIVE_ORDER));
-                break;
-            case "name_desc":
-                resp.getFollowers().sort(Comparator.comparing(UserMinified::getUserName,String.CASE_INSENSITIVE_ORDER).reversed());
-                break;
-            default:
-        }
-
+        User user = list.getUser(userId);
+        FollowersListDTO resp = new FollowersListDTO(user);
+        sortName(resp,order);
         return resp;
     }
 
@@ -100,5 +71,33 @@ public class UserServiceImpl implements IUserService{
     @Override
     public ResponseEntity<Object> newUser(String userName) throws IOException {
         return list.newUser(userName);
+    }
+
+    /**
+     * Metodos de ordenamiento para los distintos DTO (estos estan sobrecargados)
+     * @param list
+     * @param order
+     */
+    public void sortName(FollowedListDTO list, String order){
+        switch (order){
+            case "name_asc":
+                list.getFolloweds().sort(Comparator.comparing(UserMinified::getUserName,String.CASE_INSENSITIVE_ORDER));
+                break;
+            case "name_desc":
+                list.getFolloweds().sort(Comparator.comparing(UserMinified::getUserName,String.CASE_INSENSITIVE_ORDER).reversed());
+                break;
+            default:
+        }
+    }
+    public void sortName(FollowersListDTO list, String order){
+        switch (order){
+            case "name_asc":
+                list.getFollowers().sort(Comparator.comparing(UserMinified::getUserName,String.CASE_INSENSITIVE_ORDER));
+                break;
+            case "name_desc":
+                list.getFollowers().sort(Comparator.comparing(UserMinified::getUserName,String.CASE_INSENSITIVE_ORDER).reversed());
+                break;
+            default:
+        }
     }
 }
